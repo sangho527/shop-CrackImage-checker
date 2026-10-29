@@ -137,7 +137,12 @@ class App:
 
         self.phase = tk.StringVar(value="대기 중")
         ttk.Label(f, textvariable=self.phase, font=("Malgun Gothic", 10, "bold")).pack(anchor="w", pady=(14, 4), **pad)
-        self.bar = ttk.Progressbar(f, mode="determinate", maximum=100)
+        st = ttk.Style()
+        try:
+            st.configure("Check.Horizontal.TProgressbar", background="#2e7d32", troughcolor="#e6e6e6")
+        except Exception:
+            pass
+        self.bar = ttk.Progressbar(f, mode="determinate", maximum=100, style="Check.Horizontal.TProgressbar")
         self.bar.pack(fill="x", **pad)
 
         logf = ttk.Frame(f)
@@ -219,7 +224,7 @@ class App:
         elif "다른 도메인의 깨진 이미지" in line:
             self.phase.set("교체할 수 있는 정상 파일을 찾는 중...")
         m = re.match(r"^\s+(\d+)/(\d+)\s*$", line)
-        if m and self.bar["mode"] == "determinate":
+        if m and str(self.bar["mode"]) == "determinate":
             i, n = int(m.group(1)), int(m.group(2))
             self.bar["value"] = i * 100 / max(n, 1)
             self.phase.set(f"{self.phase_name} ({i:,}/{n:,})")
