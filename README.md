@@ -98,15 +98,24 @@ vivacious.kr 전체 상품을 대상으로 검사했습니다. (2026년 10월 27
 
 > 예시 쇼핑몰로 실행한 화면입니다. 깨진 이미지는 빨간색으로 바로 표시됩니다.
 
-**처음 한 번만: 실행 파일 만들기**
+**내려받기 — 설치 필요 없음**
 
-1. 이 저장소를 내려받습니다. (`Code` → `Download ZIP` → 압축 풀기)
-2. 윈도우 PC에 [Python](https://www.python.org/downloads/)을 설치합니다. 설치 첫 화면에서 **"Add python.exe to PATH"를 꼭 체크**하세요.
-3. `build_exe.bat`을 더블클릭합니다. 1~3분 뒤 같은 폴더에 `ShopImageChecker.exe`가 생깁니다.
-4. 팀원에게는 `ShopImageChecker.exe`와 [`docs/사용방법.txt`](docs/사용방법.txt) 두 파일만 전달하면 됩니다. **받는 사람은 파이썬을 설치할 필요가 없습니다.**
+1. 저장소 오른쪽의 **Releases → 쇼핑몰 이미지 검사기 (최신 버전)**으로 들어갑니다.
+   👉 [최신 버전 바로 받기](../../releases/latest)
+2. **`ShopImageChecker.zip`**을 내려받아 압축을 풉니다. 안에 프로그램과 사용방법.txt가 들어 있습니다.
+3. 팀원에게는 이 다운로드 링크만 공유하면 됩니다. **파이썬 등 다른 프로그램을 설치할 필요가 없습니다.**
 
-> **`Python Python`이라고만 나오고 설치가 실패한다면?**
-> 파이썬이 설치되지 않은 상태에서 윈도우 기본 바로가기(Microsoft Store 안내용 가짜 `python`)가 실행된 것입니다. python.org에서 파이썬을 설치한 뒤 다시 실행하세요. 그래도 같다면 **설정 → 앱 → 고급 앱 설정 → 앱 실행 별칭**에서 `python.exe`, `python3.exe`를 끄세요.
+> 실행 파일은 코드가 바뀔 때마다 GitHub가 윈도우 환경에서 자동으로 새로 만들어 Releases에 올립니다. ([`build-exe.yml`](.github/workflows/build-exe.yml))
+
+<details>
+<summary>직접 실행 파일을 만들고 싶다면 (개발자용)</summary>
+
+1. 윈도우 PC에 [Python](https://www.python.org/downloads/)을 설치합니다. 설치 첫 화면에서 **"Add python.exe to PATH"를 꼭 체크**하세요.
+2. `build_exe.bat`을 더블클릭하면 1~3분 뒤 같은 폴더에 `ShopImageChecker.exe`가 생깁니다.
+
+`Python Python`이라고만 나오고 실패한다면 파이썬이 설치되지 않은 상태에서 윈도우 기본 바로가기(Microsoft Store 안내용)가 실행된 것입니다. python.org에서 설치한 뒤 다시 실행하고, 그래도 같다면 **설정 → 앱 → 고급 앱 설정 → 앱 실행 별칭**에서 `python.exe`, `python3.exe`를 끄세요.
+
+</details>
 
 **검사하기**
 
@@ -157,7 +166,8 @@ python shop_image_check.py https://vivacious.kr/ --limit 30
 |---|---|
 | `shop_image_check.py` | 검사 엔진 (상품 수집 → 이미지 검사 → 엑셀 작성) |
 | `image_checker_app.py` | 화면(GUI) 프로그램 |
-| `build_exe.bat` | 윈도우 실행 파일(.exe) 만들기 |
+| `build_exe.bat` | 윈도우 실행 파일(.exe)을 직접 만들기 |
+| `.github/workflows/build-exe.yml` | 실행 파일을 자동으로 만들어 Releases에 올리는 설정 |
 | `run_check.bat` | 명령어 버전을 더블클릭으로 실행 |
 | `docs/사용방법.txt` | 팀원 배포용 사용 설명서 |
 | `generic_image_checker.py` | 카페24가 아닌 일반 사이트용 간단 검사기 (CSV·HTML 리포트) |

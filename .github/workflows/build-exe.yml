@@ -1,0 +1,62 @@
+name: Build Windows exe
+
+# main 브랜치에 코드가 올라오거나, Actions 탭에서 직접 실행하면
+# 윈도우용 ShopImageChecker.exe를 만들어 Releases에 올립니다.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "shop_image_check.py"
+      - "image_checker_app.py"
+      - "requirements.txt"
+      - ".github/workflows/build-exe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install packages
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt pyinstaller
+
+      - name: Build exe
+        run: python -m PyInstaller --noconfirm --clean --onefile --windowed --name ShopImageChecker image_checker_app.py
+
+      - name: Smoke test (engine imports and runs)
+        run: python shop_image_check.py --help
+
+      - name: Package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force release | Out-Null
+          Copy-Item dist/ShopImageChecker.exe release/
+          Copy-Item "docs/사용방법.txt" release/
+          Compress-Archive -Path release/* -DestinationPath ShopImageChecker.zip -Force
+
+      - name: Upload to Releases (latest)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: 쇼핑몰 이미지 검사기 (최신 버전)
+          body: |
+            **ShopImageChecker.zip**을 내려받아 압축을 풀고 `ShopImageChecker.exe`를 더블클릭하세요.
+            파이썬 등 다른 프로그램을 설치할 필요가 없습니다.
+
+            처음 실행할 때 "Windows의 PC 보호" 창이 뜨면 [추가 정보] → [실행]을 누르세요.
+
+            빌드 커밋: ${{ github.sha }}
+          files: |
+            ShopImageChecker.zip
+            dist/ShopImageChecker.exe
+          make_latest: true
