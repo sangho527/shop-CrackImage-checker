@@ -105,6 +105,9 @@ vivacious.kr 전체 상품을 대상으로 검사했습니다. (2026년 10월 27
 3. `build_exe.bat`을 더블클릭합니다. 1~3분 뒤 같은 폴더에 `ShopImageChecker.exe`가 생깁니다.
 4. 팀원에게는 `ShopImageChecker.exe`와 [`docs/사용방법.txt`](docs/사용방법.txt) 두 파일만 전달하면 됩니다. **받는 사람은 파이썬을 설치할 필요가 없습니다.**
 
+> **`Python Python`이라고만 나오고 설치가 실패한다면?**
+> 파이썬이 설치되지 않은 상태에서 윈도우 기본 바로가기(Microsoft Store 안내용 가짜 `python`)가 실행된 것입니다. python.org에서 파이썬을 설치한 뒤 다시 실행하세요. 그래도 같다면 **설정 → 앱 → 고급 앱 설정 → 앱 실행 별칭**에서 `python.exe`, `python3.exe`를 끄세요.
+
 **검사하기**
 
 1. `ShopImageChecker.exe`를 더블클릭합니다.
