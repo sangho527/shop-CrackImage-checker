@@ -1,0 +1,16 @@
+# 검사 결과 / 로그 (쇼핑몰 데이터는 저장소에 올리지 않음)
+*.xlsx
+*.csv
+*.log
+image_report_*.html
+
+# 빌드 산출물
+build/
+dist/
+*.spec
+*.exe
+
+# Python
+__pycache__/
+*.pyc
+.venv/
